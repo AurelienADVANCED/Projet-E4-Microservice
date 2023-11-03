@@ -3,20 +3,20 @@ version: '3.8'
 services:
   flask_admin:
     container_name: flask_admin
-    build: ./flask-adminator
+    image: 'aurelienadvanced/flask_admin'
     restart: always
     networks: 
       - web_network
 
   flask_light:
     container_name: flask_light
-    build: ./flask-light-bootstrap
+    image: 'aurelienadvanced/flask_light'
     restart: always
     networks: 
       - web_network
 
   flask_material:
-    build: ./flask-material-dashboard
+    image: 'aurelienadvanced/flask_material'
     restart: always
     networks: 
       - web_network
@@ -26,14 +26,14 @@ services:
   
   flask_soft:
     container_name: flask_soft
-    build: ./flask-soft-ui-dashboard
+    image: 'aurelienadvanced/flask_soft'
     restart: always
     networks: 
       - web_network
 
   flask_volt:
     container_name: flask_volt
-    build: ./flask-volt-dashboard
+    image: 'aurelienadvanced/flask_soft'
     restart: always
     networks:
       - web_network
@@ -63,4 +63,3 @@ services:
 networks: 
   web_network:
     driver: bridge
-  
