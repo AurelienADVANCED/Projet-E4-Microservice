@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  flask_admin:
+    container_name: flask_admin
+    build: ./flask-adminator
+    restart: always
+    networks: 
+      - web_network
+
+  flask_light:
+    container_name: flask_light
+    build: ./flask-light-bootstrap
+    restart: always
+    networks: 
+      - web_network
+
+  flask_material:
+    build: ./flask-material-dashboard
+    restart: always
+    networks: 
+      - web_network
+    deploy:
+      mode: replicated
+      replicas: 5
+  
+  flask_soft:
+    container_name: flask_soft
+    build: ./flask-soft-ui-dashboard
+    restart: always
+    networks: 
+      - web_network
+
+  flask_volt:
+    container_name: flask_volt
+    build: ./flask-volt-dashboard
+    restart: always
+    networks:
+      - web_network
+    ports:
+      - "4004:4004"
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: "nginx:mainline-alpine-slim"
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+      - "5002:5002"
+      - "5003:5003"
+
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - web_network
+    depends_on:
+      - flask_admin
+      - flask_light
+      - flask_material
+      - flask_soft
+
+networks: 
+  web_network:
+    driver: bridge
+  
