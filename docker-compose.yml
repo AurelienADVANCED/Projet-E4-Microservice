@@ -38,7 +38,7 @@ services:
     networks:
       - web_network
     ports:
-      - "4004:4004"
+      - "5004:5004"
 
   nginx:
     container_name: nginx
